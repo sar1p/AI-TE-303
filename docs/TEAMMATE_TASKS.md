@@ -108,7 +108,7 @@ git switch main
 git pull --ff-only origin main
 git switch -c feature/expert-system
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -c constraints.txt
 .\.venv\Scripts\python.exe -m pytest tests/expert_system -q
 git status
 git diff
