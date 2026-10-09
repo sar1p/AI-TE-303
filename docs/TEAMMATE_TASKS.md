@@ -13,7 +13,7 @@ All repository content uses English. Work on your own feature branch and use you
 ## Prerequisites
 
 - A GitHub account and accepted collaborator access to the shared `AI-TE-303` repository.
-- An existing working Python installation. The lead and teammate choose one tested supported version, initially Python 3.12 or 3.13.
+- Python 3.12, matching the lead's tested environment and CI.
 - Git or GitHub Desktop. GitHub CLI is optional.
 - A local clone in its own folder, an editor or coding assistant, and a project virtual environment.
 - The repository's project plan, module contracts, pinned dependency files, and this handoff.
@@ -32,9 +32,10 @@ docs/EXPERT_SYSTEM.md
 
 Coordinate shared contract changes with the lead. Do not independently redesign `search_algorithm/`, `app.py`, dependency files, CI, or repository settings. Review those components through the agreed collaboration workflow when useful.
 
-## Proposed diagnosis contract
+## Frozen diagnosis contract
 
-`diagnose(facts: dict[str, object]) -> DiagnosisResult`
+`expert_system.engine.diagnose(facts: dict[str, object]) -> dict`.
+The exact JSON-compatible fields and record shapes are defined in [MODULE_CONTRACTS.md](MODULE_CONTRACTS.md).
 
 The agreed result has:
 

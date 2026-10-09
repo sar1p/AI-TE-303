@@ -9,7 +9,8 @@ baseline. A separate rule-based expert system will explain suspected robot fault
 ## Implementation status
 
 - Project layout, ownership, and module contracts: established.
-- Search algorithms, automated validation, and visual demonstration: in progress.
+- D* Lite, A*, validated maps, and independent search tests: implemented.
+- Visual demonstration, scenario replay, and exported evidence: in progress.
 - Expert system: reserved for the second team member; not implemented yet.
 
 See [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for scope and
@@ -21,7 +22,8 @@ Use Python 3.12. From this repository in PowerShell:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -c constraints.txt
+.\.venv\Scripts\python.exe -m pytest -q
 ```
 
 Run commands through the virtual environment's Python directly. Activating it
