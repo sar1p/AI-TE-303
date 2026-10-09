@@ -10,6 +10,8 @@ The lead builds D* Lite route planning, the visual application, and the integrat
 
 All repository content uses English. Work on your own feature branch and use your own Git/GitHub identity for your actual contributions.
 
+Track your deliverables in [issue #3](https://github.com/sar1p/AI-TE-303/issues/3). Collaborator access is pending confirmation of your GitHub username. You can already clone the public repository to read the contracts and begin local work.
+
 ## Prerequisites
 
 - A GitHub account and accepted collaborator access to the shared `AI-TE-303` repository.

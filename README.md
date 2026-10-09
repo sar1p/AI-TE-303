@@ -49,6 +49,11 @@ search state, unreachable-goal recovery, and widespread map changes. Exports
 contain actual inputs, computed routes, metrics, source SHA, and environment.
 Development exports go to ignored `artifacts/`.
 
+Verified running results, source metadata, real screenshots, and clean-clone
+checks are in [docs/evidence/](docs/evidence/README.md).
+
+![Live route repair](docs/evidence/route-demo.jpg)
+
 ## Why these methods
 
 | Method | Role | Limits |
@@ -74,6 +79,10 @@ Use feature branches, tested commits, pull requests, and merge commits.
 The teammate should use their own account and implement their reserved module.
 See [CONTRIBUTING.md](CONTRIBUTING.md) and
 [MODULE_CONTRACTS.md](docs/MODULE_CONTRACTS.md).
+
+The reserved teammate task is tracked in
+[issue #3](https://github.com/sar1p/AI-TE-303/issues/3). Collaborator access will be
+added after the teammate's GitHub username is confirmed.
 
 The classroom materials establish the assignment background. The warehouse
 theme and advanced algorithm are this team's design choices. Simulation results

@@ -1,0 +1,1652 @@
+{
+  "schema_version": 1,
+  "scope": "search-only; diagnostic inference not run",
+  "diagnostic_inference_included": false,
+  "metadata": {
+    "timestamp_utc": "2026-10-09T11:19:40.041468+00:00",
+    "source_commit": "9a724d68378242e4587b7536bffe66889c9bc86e",
+    "worktree_dirty": false,
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "streamlit": "1.65.0",
+      "pytest": "9.1.1"
+    },
+    "implementation": "cpython"
+  },
+  "inputs": [
+    {
+      "id": "corridor-changes",
+      "title": "Warehouse Corridor Changes",
+      "description": "Synthetic warehouse shelves frame a central aisle. Close one central cell, move along the replanned route, reopen the aisle, and continue.",
+      "rows": [
+        ".............",
+        ".###...###...",
+        ".###...###...",
+        ".............",
+        ".............",
+        "...###.###...",
+        "...###.###...",
+        "............."
+      ],
+      "start": [
+        4,
+        1
+      ],
+      "goal": [
+        4,
+        11
+      ],
+      "events": [
+        {
+          "id": "corridor-close-center-aisle",
+          "type": "map",
+          "label": "Block the central aisle",
+          "changes": [
+            {
+              "cell": [
+                4,
+                6
+              ],
+              "blocked": true
+            }
+          ]
+        },
+        {
+          "id": "corridor-step-around-shelves",
+          "type": "move",
+          "label": "Move one legal step on the replanned route"
+        },
+        {
+          "id": "corridor-reopen-center-aisle",
+          "type": "map",
+          "label": "Reopen the central aisle",
+          "changes": [
+            {
+              "cell": [
+                4,
+                6
+              ],
+              "blocked": false
+            }
+          ]
+        },
+        {
+          "id": "corridor-continue-route",
+          "type": "move",
+          "label": "Continue one legal route step"
+        }
+      ]
+    },
+    {
+      "id": "movement-reuse",
+      "title": "Movement and Local Map Reuse",
+      "description": "A medium synthetic warehouse has shelf blocks and open cross-aisles. The robot advances several steps while two local aisle closures are applied and reversed.",
+      "rows": [
+        "........................",
+        "..###..###...###...###..",
+        "..###..###...###...###..",
+        "..###..###...###...###..",
+        "..###..###...###...###..",
+        "........................",
+        "..###..###...###...###..",
+        "..###..###...###...###..",
+        "..###..###...###...###..",
+        "..###..###...###...###..",
+        "........................",
+        "..###..###...###...###..",
+        "..###..###...###...###..",
+        "..###..###...###...###..",
+        "..###..###...###...###..",
+        "........................"
+      ],
+      "start": [
+        5,
+        1
+      ],
+      "goal": [
+        10,
+        22
+      ],
+      "events": [
+        {
+          "id": "movement-step-one",
+          "type": "move",
+          "label": "Advance one legal route step"
+        },
+        {
+          "id": "movement-close-east-cell",
+          "type": "map",
+          "label": "Close a cell in the cross-aisle",
+          "changes": [
+            {
+              "cell": [
+                5,
+                18
+              ],
+              "blocked": true
+            }
+          ]
+        },
+        {
+          "id": "movement-step-two",
+          "type": "move",
+          "label": "Advance one legal route step"
+        },
+        {
+          "id": "movement-step-three",
+          "type": "move",
+          "label": "Advance one more legal route step"
+        },
+        {
+          "id": "movement-reopen-east-cell",
+          "type": "map",
+          "label": "Reopen the cross-aisle cell",
+          "changes": [
+            {
+              "cell": [
+                5,
+                18
+              ],
+              "blocked": false
+            }
+          ]
+        },
+        {
+          "id": "movement-step-four",
+          "type": "move",
+          "label": "Advance one legal route step"
+        },
+        {
+          "id": "movement-close-center-cell",
+          "type": "map",
+          "label": "Close another cross-aisle cell",
+          "changes": [
+            {
+              "cell": [
+                5,
+                12
+              ],
+              "blocked": true
+            }
+          ]
+        },
+        {
+          "id": "movement-step-five",
+          "type": "move",
+          "label": "Advance one legal route step"
+        },
+        {
+          "id": "movement-reopen-center-cell",
+          "type": "map",
+          "label": "Reopen the cross-aisle cell",
+          "changes": [
+            {
+              "cell": [
+                5,
+                12
+              ],
+              "blocked": false
+            }
+          ]
+        },
+        {
+          "id": "movement-step-six",
+          "type": "move",
+          "label": "Advance one final legal route step"
+        }
+      ]
+    },
+    {
+      "id": "unreachable-recovery",
+      "title": "Unreachable Goal and Recovery",
+      "description": "A single open gap connects two warehouse areas. Closing it isolates the open goal; reopening it restores access. The robot does not move while the goal is unreachable.",
+      "rows": [
+        "....#....",
+        "....#....",
+        "....#....",
+        ".........",
+        "....#....",
+        "....#....",
+        "....#...."
+      ],
+      "start": [
+        3,
+        1
+      ],
+      "goal": [
+        3,
+        7
+      ],
+      "events": [
+        {
+          "id": "recovery-close-only-gap",
+          "type": "map",
+          "label": "Close the only gap",
+          "changes": [
+            {
+              "cell": [
+                3,
+                4
+              ],
+              "blocked": true
+            }
+          ]
+        },
+        {
+          "id": "recovery-reopen-only-gap",
+          "type": "map",
+          "label": "Reopen the gap",
+          "changes": [
+            {
+              "cell": [
+                3,
+                4
+              ],
+              "blocked": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "widespread-changes",
+      "title": "Widespread Map Changes",
+      "description": "This medium synthetic map keeps its entire boundary open while scattered interior cells are blocked and restored in batches. It illustrates broad map edits and makes no claim that incremental planning is faster.",
+      "rows": [
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................",
+        "............................"
+      ],
+      "start": [
+        0,
+        0
+      ],
+      "goal": [
+        19,
+        27
+      ],
+      "events": [
+        {
+          "id": "widespread-block-scattered-cells",
+          "type": "map",
+          "label": "Block scattered interior cells",
+          "changes": [
+            {
+              "cell": [
+                2,
+                4
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                2,
+                11
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                2,
+                20
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                4,
+                7
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                4,
+                16
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                5,
+                24
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                7,
+                3
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                7,
+                12
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                7,
+                21
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                9,
+                6
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                9,
+                18
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                11,
+                10
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                12,
+                23
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                14,
+                5
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                15,
+                14
+              ],
+              "blocked": true
+            },
+            {
+              "cell": [
+                17,
+                22
+              ],
+              "blocked": true
+            }
+          ]
+        },
+        {
+          "id": "widespread-restore-scattered-cells",
+          "type": "map",
+          "label": "Restore the scattered interior cells",
+          "changes": [
+            {
+              "cell": [
+                2,
+                4
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                2,
+                11
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                2,
+                20
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                4,
+                7
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                4,
+                16
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                5,
+                24
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                7,
+                3
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                7,
+                12
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                7,
+                21
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                9,
+                6
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                9,
+                18
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                11,
+                10
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                12,
+                23
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                14,
+                5
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                15,
+                14
+              ],
+              "blocked": false
+            },
+            {
+              "cell": [
+                17,
+                22
+              ],
+              "blocked": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "methodology": {
+    "repeats_per_scenario": 5,
+    "algorithms": [
+      "persistent_dstar_lite",
+      "repeated_astar"
+    ],
+    "execution_order": "D* Lite first, A* second for each plan; five repeats are not a claim of order-neutral microbenchmark.",
+    "movement_policy": "For each move event, take the next cell from the current D* Lite route and apply that same start position to both algorithms. Route-step selection is outside both timers.",
+    "timing_boundaries": {
+      "initial_dstar_lite": "planner construction plus initial plan; scenario grid parsing is excluded",
+      "initial_astar": "search call on a fresh prebuilt grid clone; scenario parsing and clone are excluded",
+      "repair_dstar_lite": "map update or start movement plus plan",
+      "repair_astar": "map validation and update or start validation, plus a fresh search",
+      "excluded": "scenario loading, route-step choice, output formatting, terminal UI, and file I/O"
+    },
+    "counting": "State and queue counts are copied from each actual SearchResult; timings use the outer boundaries above.",
+    "comparison_checks": "Every result pair must match status and cost, and every found path is checked against its live map.",
+    "interpretation": "These are measurements on the included synthetic inputs; they do not establish a universal performance advantage."
+  },
+  "raw_csv": "raw.csv",
+  "raw_row_count": 110,
+  "scenario_summaries": [
+    {
+      "scenario": {
+        "id": "corridor-changes",
+        "title": "Warehouse Corridor Changes",
+        "description": "Synthetic warehouse shelves frame a central aisle. Close one central cell, move along the replanned route, reopen the aisle, and continue.",
+        "rows": [
+          ".............",
+          ".###...###...",
+          ".###...###...",
+          ".............",
+          ".............",
+          "...###.###...",
+          "...###.###...",
+          "............."
+        ],
+        "start": [
+          4,
+          1
+        ],
+        "goal": [
+          4,
+          11
+        ],
+        "events": [
+          {
+            "id": "corridor-close-center-aisle",
+            "type": "map",
+            "label": "Block the central aisle",
+            "changes": [
+              {
+                "cell": [
+                  4,
+                  6
+                ],
+                "blocked": true
+              }
+            ]
+          },
+          {
+            "id": "corridor-step-around-shelves",
+            "type": "move",
+            "label": "Move one legal step on the replanned route"
+          },
+          {
+            "id": "corridor-reopen-center-aisle",
+            "type": "map",
+            "label": "Reopen the central aisle",
+            "changes": [
+              {
+                "cell": [
+                  4,
+                  6
+                ],
+                "blocked": false
+              }
+            ]
+          },
+          {
+            "id": "corridor-continue-route",
+            "type": "move",
+            "label": "Continue one legal route step"
+          }
+        ]
+      },
+      "repetition_count": 5,
+      "algorithms": {
+        "dstar_lite": {
+          "initial_median": {
+            "elapsed_ms": 0.7417,
+            "processed_states": 11,
+            "queue_pops": 11,
+            "queue_pushes": 29
+          },
+          "repair_total_median_per_repetition": {
+            "elapsed_ms": 2.3358,
+            "processed_states": 31,
+            "queue_pops": 55,
+            "queue_pushes": 56
+          },
+          "cumulative_median_per_repetition": {
+            "elapsed_ms": 3.0739,
+            "processed_states": 42,
+            "queue_pops": 66,
+            "queue_pushes": 85
+          },
+          "per_event_medians": [
+            {
+              "event_id": "corridor-close-center-aisle",
+              "event_type": "map",
+              "label": "Block the central aisle",
+              "median": {
+                "elapsed_ms": 1.5627,
+                "processed_states": 25,
+                "queue_pops": 49,
+                "queue_pushes": 46
+              }
+            },
+            {
+              "event_id": "corridor-step-around-shelves",
+              "event_type": "move",
+              "label": "Move one legal step on the replanned route",
+              "median": {
+                "elapsed_ms": 0.1292,
+                "processed_states": 0,
+                "queue_pops": 0,
+                "queue_pushes": 0
+              }
+            },
+            {
+              "event_id": "corridor-reopen-center-aisle",
+              "event_type": "map",
+              "label": "Reopen the central aisle",
+              "median": {
+                "elapsed_ms": 0.5191,
+                "processed_states": 6,
+                "queue_pops": 6,
+                "queue_pushes": 10
+              }
+            },
+            {
+              "event_id": "corridor-continue-route",
+              "event_type": "move",
+              "label": "Continue one legal route step",
+              "median": {
+                "elapsed_ms": 0.1178,
+                "processed_states": 0,
+                "queue_pops": 0,
+                "queue_pushes": 0
+              }
+            }
+          ]
+        },
+        "astar": {
+          "initial_median": {
+            "elapsed_ms": 0.1301,
+            "processed_states": 11,
+            "queue_pops": 11,
+            "queue_pushes": 26
+          },
+          "repair_total_median_per_repetition": {
+            "elapsed_ms": 1.0184,
+            "processed_states": 87,
+            "queue_pops": 87,
+            "queue_pushes": 132
+          },
+          "cumulative_median_per_repetition": {
+            "elapsed_ms": 1.149,
+            "processed_states": 98,
+            "queue_pops": 98,
+            "queue_pushes": 158
+          },
+          "per_event_medians": [
+            {
+              "event_id": "corridor-close-center-aisle",
+              "event_type": "map",
+              "label": "Block the central aisle",
+              "median": {
+                "elapsed_ms": 0.2839,
+                "processed_states": 24,
+                "queue_pops": 24,
+                "queue_pushes": 35
+              }
+            },
+            {
+              "event_id": "corridor-step-around-shelves",
+              "event_type": "move",
+              "label": "Move one legal step on the replanned route",
+              "median": {
+                "elapsed_ms": 0.2416,
+                "processed_states": 21,
+                "queue_pops": 21,
+                "queue_pushes": 32
+              }
+            },
+            {
+              "event_id": "corridor-reopen-center-aisle",
+              "event_type": "map",
+              "label": "Reopen the central aisle",
+              "median": {
+                "elapsed_ms": 0.2582,
+                "processed_states": 22,
+                "queue_pops": 22,
+                "queue_pushes": 34
+              }
+            },
+            {
+              "event_id": "corridor-continue-route",
+              "event_type": "move",
+              "label": "Continue one legal route step",
+              "median": {
+                "elapsed_ms": 0.2359,
+                "processed_states": 20,
+                "queue_pops": 20,
+                "queue_pushes": 31
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "movement-reuse",
+        "title": "Movement and Local Map Reuse",
+        "description": "A medium synthetic warehouse has shelf blocks and open cross-aisles. The robot advances several steps while two local aisle closures are applied and reversed.",
+        "rows": [
+          "........................",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "........................",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "........................",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "........................"
+        ],
+        "start": [
+          5,
+          1
+        ],
+        "goal": [
+          10,
+          22
+        ],
+        "events": [
+          {
+            "id": "movement-step-one",
+            "type": "move",
+            "label": "Advance one legal route step"
+          },
+          {
+            "id": "movement-close-east-cell",
+            "type": "map",
+            "label": "Close a cell in the cross-aisle",
+            "changes": [
+              {
+                "cell": [
+                  5,
+                  18
+                ],
+                "blocked": true
+              }
+            ]
+          },
+          {
+            "id": "movement-step-two",
+            "type": "move",
+            "label": "Advance one legal route step"
+          },
+          {
+            "id": "movement-step-three",
+            "type": "move",
+            "label": "Advance one more legal route step"
+          },
+          {
+            "id": "movement-reopen-east-cell",
+            "type": "map",
+            "label": "Reopen the cross-aisle cell",
+            "changes": [
+              {
+                "cell": [
+                  5,
+                  18
+                ],
+                "blocked": false
+              }
+            ]
+          },
+          {
+            "id": "movement-step-four",
+            "type": "move",
+            "label": "Advance one legal route step"
+          },
+          {
+            "id": "movement-close-center-cell",
+            "type": "map",
+            "label": "Close another cross-aisle cell",
+            "changes": [
+              {
+                "cell": [
+                  5,
+                  12
+                ],
+                "blocked": true
+              }
+            ]
+          },
+          {
+            "id": "movement-step-five",
+            "type": "move",
+            "label": "Advance one legal route step"
+          },
+          {
+            "id": "movement-reopen-center-cell",
+            "type": "map",
+            "label": "Reopen the cross-aisle cell",
+            "changes": [
+              {
+                "cell": [
+                  5,
+                  12
+                ],
+                "blocked": false
+              }
+            ]
+          },
+          {
+            "id": "movement-step-six",
+            "type": "move",
+            "label": "Advance one final legal route step"
+          }
+        ]
+      },
+      "repetition_count": 5,
+      "algorithms": {
+        "dstar_lite": {
+          "initial_median": {
+            "elapsed_ms": 4.9028,
+            "processed_states": 84,
+            "queue_pops": 113,
+            "queue_pushes": 145
+          },
+          "repair_total_median_per_repetition": {
+            "elapsed_ms": 3.0851,
+            "processed_states": 4,
+            "queue_pops": 4,
+            "queue_pushes": 6
+          },
+          "cumulative_median_per_repetition": {
+            "elapsed_ms": 7.9835,
+            "processed_states": 88,
+            "queue_pops": 117,
+            "queue_pushes": 151
+          },
+          "per_event_medians": [
+            {
+              "event_id": "movement-step-one",
+              "event_type": "move",
+              "label": "Advance one legal route step",
+              "median": {
+                "elapsed_ms": 0.2846,
+                "processed_states": 0,
+                "queue_pops": 0,
+                "queue_pushes": 0
+              }
+            },
+            {
+              "event_id": "movement-close-east-cell",
+              "event_type": "map",
+              "label": "Close a cell in the cross-aisle",
+              "median": {
+                "elapsed_ms": 0.4163,
+                "processed_states": 1,
+                "queue_pops": 1,
+                "queue_pushes": 1
+              }
+            },
+            {
+              "event_id": "movement-step-two",
+              "event_type": "move",
+              "label": "Advance one legal route step",
+              "median": {
+                "elapsed_ms": 0.2726,
+                "processed_states": 0,
+                "queue_pops": 0,
+                "queue_pushes": 0
+              }
+            },
+            {
+              "event_id": "movement-step-three",
+              "event_type": "move",
+              "label": "Advance one more legal route step",
+              "median": {
+                "elapsed_ms": 0.2587,
+                "processed_states": 0,
+                "queue_pops": 0,
+                "queue_pushes": 0
+              }
+            },
+            {
+              "event_id": "movement-reopen-east-cell",
+              "event_type": "map",
+              "label": "Reopen the cross-aisle cell",
+              "median": {
+                "elapsed_ms": 0.3887,
+                "processed_states": 1,
+                "queue_pops": 1,
+                "queue_pushes": 2
+              }
+            },
+            {
+              "event_id": "movement-step-four",
+              "event_type": "move",
+              "label": "Advance one legal route step",
+              "median": {
+                "elapsed_ms": 0.2508,
+                "processed_states": 0,
+                "queue_pops": 0,
+                "queue_pushes": 0
+              }
+            },
+            {
+              "event_id": "movement-close-center-cell",
+              "event_type": "map",
+              "label": "Close another cross-aisle cell",
+              "median": {
+                "elapsed_ms": 0.3803,
+                "processed_states": 1,
+                "queue_pops": 1,
+                "queue_pushes": 1
+              }
+            },
+            {
+              "event_id": "movement-step-five",
+              "event_type": "move",
+              "label": "Advance one legal route step",
+              "median": {
+                "elapsed_ms": 0.2359,
+                "processed_states": 0,
+                "queue_pops": 0,
+                "queue_pushes": 0
+              }
+            },
+            {
+              "event_id": "movement-reopen-center-cell",
+              "event_type": "map",
+              "label": "Reopen the cross-aisle cell",
+              "median": {
+                "elapsed_ms": 0.3607,
+                "processed_states": 1,
+                "queue_pops": 1,
+                "queue_pushes": 2
+              }
+            },
+            {
+              "event_id": "movement-step-six",
+              "event_type": "move",
+              "label": "Advance one final legal route step",
+              "median": {
+                "elapsed_ms": 0.2283,
+                "processed_states": 0,
+                "queue_pops": 0,
+                "queue_pushes": 0
+              }
+            }
+          ]
+        },
+        "astar": {
+          "initial_median": {
+            "elapsed_ms": 0.9478,
+            "processed_states": 84,
+            "queue_pops": 84,
+            "queue_pushes": 114
+          },
+          "repair_total_median_per_repetition": {
+            "elapsed_ms": 7.0538,
+            "processed_states": 622,
+            "queue_pops": 622,
+            "queue_pushes": 827
+          },
+          "cumulative_median_per_repetition": {
+            "elapsed_ms": 8.0093,
+            "processed_states": 706,
+            "queue_pops": 706,
+            "queue_pushes": 941
+          },
+          "per_event_medians": [
+            {
+              "event_id": "movement-step-one",
+              "event_type": "move",
+              "label": "Advance one legal route step",
+              "median": {
+                "elapsed_ms": 0.8501,
+                "processed_states": 75,
+                "queue_pops": 75,
+                "queue_pushes": 99
+              }
+            },
+            {
+              "event_id": "movement-close-east-cell",
+              "event_type": "map",
+              "label": "Close a cell in the cross-aisle",
+              "median": {
+                "elapsed_ms": 0.7454,
+                "processed_states": 66,
+                "queue_pops": 66,
+                "queue_pushes": 83
+              }
+            },
+            {
+              "event_id": "movement-step-two",
+              "event_type": "move",
+              "label": "Advance one legal route step",
+              "median": {
+                "elapsed_ms": 0.725,
+                "processed_states": 65,
+                "queue_pops": 65,
+                "queue_pushes": 82
+              }
+            },
+            {
+              "event_id": "movement-step-three",
+              "event_type": "move",
+              "label": "Advance one more legal route step",
+              "median": {
+                "elapsed_ms": 0.7203,
+                "processed_states": 64,
+                "queue_pops": 64,
+                "queue_pushes": 81
+              }
+            },
+            {
+              "event_id": "movement-reopen-east-cell",
+              "event_type": "map",
+              "label": "Reopen the cross-aisle cell",
+              "median": {
+                "elapsed_ms": 0.8251,
+                "processed_states": 73,
+                "queue_pops": 73,
+                "queue_pushes": 97
+              }
+            },
+            {
+              "event_id": "movement-step-four",
+              "event_type": "move",
+              "label": "Advance one legal route step",
+              "median": {
+                "elapsed_ms": 0.8121,
+                "processed_states": 72,
+                "queue_pops": 72,
+                "queue_pushes": 96
+              }
+            },
+            {
+              "event_id": "movement-close-center-cell",
+              "event_type": "map",
+              "label": "Close another cross-aisle cell",
+              "median": {
+                "elapsed_ms": 0.51,
+                "processed_states": 45,
+                "queue_pops": 45,
+                "queue_pushes": 62
+              }
+            },
+            {
+              "event_id": "movement-step-five",
+              "event_type": "move",
+              "label": "Advance one legal route step",
+              "median": {
+                "elapsed_ms": 0.4405,
+                "processed_states": 39,
+                "queue_pops": 39,
+                "queue_pushes": 58
+              }
+            },
+            {
+              "event_id": "movement-reopen-center-cell",
+              "event_type": "map",
+              "label": "Reopen the cross-aisle cell",
+              "median": {
+                "elapsed_ms": 0.7505,
+                "processed_states": 66,
+                "queue_pops": 66,
+                "queue_pushes": 92
+              }
+            },
+            {
+              "event_id": "movement-step-six",
+              "event_type": "move",
+              "label": "Advance one final legal route step",
+              "median": {
+                "elapsed_ms": 0.6423,
+                "processed_states": 57,
+                "queue_pops": 57,
+                "queue_pushes": 77
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "unreachable-recovery",
+        "title": "Unreachable Goal and Recovery",
+        "description": "A single open gap connects two warehouse areas. Closing it isolates the open goal; reopening it restores access. The robot does not move while the goal is unreachable.",
+        "rows": [
+          "....#....",
+          "....#....",
+          "....#....",
+          ".........",
+          "....#....",
+          "....#....",
+          "....#...."
+        ],
+        "start": [
+          3,
+          1
+        ],
+        "goal": [
+          3,
+          7
+        ],
+        "events": [
+          {
+            "id": "recovery-close-only-gap",
+            "type": "map",
+            "label": "Close the only gap",
+            "changes": [
+              {
+                "cell": [
+                  3,
+                  4
+                ],
+                "blocked": true
+              }
+            ]
+          },
+          {
+            "id": "recovery-reopen-only-gap",
+            "type": "map",
+            "label": "Reopen the gap",
+            "changes": [
+              {
+                "cell": [
+                  3,
+                  4
+                ],
+                "blocked": false
+              }
+            ]
+          }
+        ]
+      },
+      "repetition_count": 5,
+      "algorithms": {
+        "dstar_lite": {
+          "initial_median": {
+            "elapsed_ms": 0.4609,
+            "processed_states": 7,
+            "queue_pops": 7,
+            "queue_pushes": 21
+          },
+          "repair_total_median_per_repetition": {
+            "elapsed_ms": 1.7839999999999998,
+            "processed_states": 33,
+            "queue_pops": 61,
+            "queue_pushes": 54
+          },
+          "cumulative_median_per_repetition": {
+            "elapsed_ms": 2.2475,
+            "processed_states": 40,
+            "queue_pops": 68,
+            "queue_pushes": 75
+          },
+          "per_event_medians": [
+            {
+              "event_id": "recovery-close-only-gap",
+              "event_type": "map",
+              "label": "Close the only gap",
+              "median": {
+                "elapsed_ms": 1.4124,
+                "processed_states": 29,
+                "queue_pops": 57,
+                "queue_pushes": 43
+              }
+            },
+            {
+              "event_id": "recovery-reopen-only-gap",
+              "event_type": "map",
+              "label": "Reopen the gap",
+              "median": {
+                "elapsed_ms": 0.3584,
+                "processed_states": 4,
+                "queue_pops": 4,
+                "queue_pushes": 11
+              }
+            }
+          ]
+        },
+        "astar": {
+          "initial_median": {
+            "elapsed_ms": 0.0833,
+            "processed_states": 7,
+            "queue_pops": 7,
+            "queue_pushes": 18
+          },
+          "repair_total_median_per_repetition": {
+            "elapsed_ms": 0.3991,
+            "processed_states": 35,
+            "queue_pops": 35,
+            "queue_pushes": 46
+          },
+          "cumulative_median_per_repetition": {
+            "elapsed_ms": 0.4839,
+            "processed_states": 42,
+            "queue_pops": 42,
+            "queue_pushes": 64
+          },
+          "per_event_medians": [
+            {
+              "event_id": "recovery-close-only-gap",
+              "event_type": "map",
+              "label": "Close the only gap",
+              "median": {
+                "elapsed_ms": 0.3084,
+                "processed_states": 28,
+                "queue_pops": 28,
+                "queue_pushes": 28
+              }
+            },
+            {
+              "event_id": "recovery-reopen-only-gap",
+              "event_type": "map",
+              "label": "Reopen the gap",
+              "median": {
+                "elapsed_ms": 0.0904,
+                "processed_states": 7,
+                "queue_pops": 7,
+                "queue_pushes": 18
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "widespread-changes",
+        "title": "Widespread Map Changes",
+        "description": "This medium synthetic map keeps its entire boundary open while scattered interior cells are blocked and restored in batches. It illustrates broad map edits and makes no claim that incremental planning is faster.",
+        "rows": [
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................"
+        ],
+        "start": [
+          0,
+          0
+        ],
+        "goal": [
+          19,
+          27
+        ],
+        "events": [
+          {
+            "id": "widespread-block-scattered-cells",
+            "type": "map",
+            "label": "Block scattered interior cells",
+            "changes": [
+              {
+                "cell": [
+                  2,
+                  4
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  2,
+                  11
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  2,
+                  20
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  4,
+                  7
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  4,
+                  16
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  5,
+                  24
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  7,
+                  3
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  7,
+                  12
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  7,
+                  21
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  9,
+                  6
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  9,
+                  18
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  11,
+                  10
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  12,
+                  23
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  14,
+                  5
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  15,
+                  14
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  17,
+                  22
+                ],
+                "blocked": true
+              }
+            ]
+          },
+          {
+            "id": "widespread-restore-scattered-cells",
+            "type": "map",
+            "label": "Restore the scattered interior cells",
+            "changes": [
+              {
+                "cell": [
+                  2,
+                  4
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  2,
+                  11
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  2,
+                  20
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  4,
+                  7
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  4,
+                  16
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  5,
+                  24
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  7,
+                  3
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  7,
+                  12
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  7,
+                  21
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  9,
+                  6
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  9,
+                  18
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  11,
+                  10
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  12,
+                  23
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  14,
+                  5
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  15,
+                  14
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  17,
+                  22
+                ],
+                "blocked": false
+              }
+            ]
+          }
+        ]
+      },
+      "repetition_count": 5,
+      "algorithms": {
+        "dstar_lite": {
+          "initial_median": {
+            "elapsed_ms": 29.3129,
+            "processed_states": 560,
+            "queue_pops": 1073,
+            "queue_pushes": 1073
+          },
+          "repair_total_median_per_repetition": {
+            "elapsed_ms": 4.696,
+            "processed_states": 32,
+            "queue_pops": 32,
+            "queue_pushes": 32
+          },
+          "cumulative_median_per_repetition": {
+            "elapsed_ms": 34.0153,
+            "processed_states": 592,
+            "queue_pops": 1105,
+            "queue_pushes": 1105
+          },
+          "per_event_medians": [
+            {
+              "event_id": "widespread-block-scattered-cells",
+              "event_type": "map",
+              "label": "Block scattered interior cells",
+              "median": {
+                "elapsed_ms": 2.4413,
+                "processed_states": 16,
+                "queue_pops": 16,
+                "queue_pushes": 16
+              }
+            },
+            {
+              "event_id": "widespread-restore-scattered-cells",
+              "event_type": "map",
+              "label": "Restore the scattered interior cells",
+              "median": {
+                "elapsed_ms": 2.2646,
+                "processed_states": 16,
+                "queue_pops": 16,
+                "queue_pushes": 16
+              }
+            }
+          ]
+        },
+        "astar": {
+          "initial_median": {
+            "elapsed_ms": 6.1639,
+            "processed_states": 560,
+            "queue_pops": 560,
+            "queue_pushes": 560
+          },
+          "repair_total_median_per_repetition": {
+            "elapsed_ms": 12.3131,
+            "processed_states": 1104,
+            "queue_pops": 1104,
+            "queue_pushes": 1104
+          },
+          "cumulative_median_per_repetition": {
+            "elapsed_ms": 18.4712,
+            "processed_states": 1664,
+            "queue_pops": 1664,
+            "queue_pushes": 1664
+          },
+          "per_event_medians": [
+            {
+              "event_id": "widespread-block-scattered-cells",
+              "event_type": "map",
+              "label": "Block scattered interior cells",
+              "median": {
+                "elapsed_ms": 6.0475,
+                "processed_states": 544,
+                "queue_pops": 544,
+                "queue_pushes": 544
+              }
+            },
+            {
+              "event_id": "widespread-restore-scattered-cells",
+              "event_type": "map",
+              "label": "Restore the scattered interior cells",
+              "median": {
+                "elapsed_ms": 6.2674,
+                "processed_states": 560,
+                "queue_pops": 560,
+                "queue_pushes": 560
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
