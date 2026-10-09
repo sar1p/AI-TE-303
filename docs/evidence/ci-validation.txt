@@ -1,0 +1,11 @@
+Source commit: 9a724d68378242e4587b7536bffe66889c9bc86e
+GitHub Actions: https://github.com/sar1p/AI-TE-303/actions/runs/37922918084
+Selected actual log lines:
+Python tests	Run automated tests	2026-10-09T11:18:58.7118122Z 90 passed in 2.14s
+Python tests	Replay named scenarios	2026-10-09T11:18:59.0048823Z corridor-changes: 5 recorded plans; final status=found, cost=10
+Python tests	Replay named scenarios	2026-10-09T11:18:59.0049252Z movement-reuse: 11 recorded plans; final status=found, cost=20
+Python tests	Replay named scenarios	2026-10-09T11:18:59.0049598Z unreachable-recovery: 3 recorded plans; final status=found, cost=6
+Python tests	Replay named scenarios	2026-10-09T11:18:59.0049973Z widespread-changes: 3 recorded plans; final status=found, cost=46
+Python tests	Replay named scenarios	2026-10-09T11:18:59.0050347Z Diagnostic inference: not run; this artifact contains search results only.
+Python tests	Validate benchmark execution	2026-10-09T11:18:59.1753640Z Raw measurements (22 rows): /home/runner/work/AI-TE-303/AI-TE-303/artifacts/benchmark/raw.csv
+Python tests	Validate benchmark execution	2026-10-09T11:18:59.1755295Z Diagnostic inference: not run; benchmark results cover search only.

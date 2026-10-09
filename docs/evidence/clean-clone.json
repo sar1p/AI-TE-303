@@ -1,0 +1,46 @@
+{
+  "scope": "Lead-owned search, interface, adapter and export tools; actual expert engine pending",
+  "source": {
+    "timestamp_utc": "2026-10-09T11:20:55.456535+00:00",
+    "source_commit": "9a724d68378242e4587b7536bffe66889c9bc86e",
+    "worktree_dirty": false,
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "streamlit": "1.65.0",
+      "pytest": "9.1.1"
+    },
+    "implementation": "cpython"
+  },
+  "fresh_remote_clone": true,
+  "fresh_virtual_environment": true,
+  "commands": [
+    {
+      "command": "python -m pip check",
+      "exit_code": 0,
+      "log": "command-1.txt"
+    },
+    {
+      "command": "python -m pytest -q",
+      "exit_code": 0,
+      "log": "command-2.txt",
+      "passed_tests": 90
+    },
+    {
+      "command": "python -m search_algorithm.main --output artifacts/verification/single-replay.json",
+      "exit_code": 0,
+      "log": "command-3.txt"
+    },
+    {
+      "command": "python tools/replay_demo.py --output artifacts/verification/replays",
+      "exit_code": 0,
+      "log": "command-4.txt"
+    },
+    {
+      "command": "python tools/benchmark_search.py --output artifacts/verification/benchmark --repeats 5",
+      "exit_code": 0,
+      "log": "command-5.txt"
+    }
+  ],
+  "post_run_worktree_dirty": false
+}
