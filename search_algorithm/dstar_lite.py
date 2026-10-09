@@ -23,6 +23,8 @@ class DStarLitePlanner:
     """Persistent shortest-path state for one finite grid and fixed goal."""
 
     def __init__(self, grid: Grid, start: Position, goal: Position):
+        if not isinstance(grid, Grid):
+            raise GridError("grid must be a Grid instance")
         self.grid = grid.clone()
         self.start = self.grid.validate_position(start, "start")
         self.goal = self.grid.validate_position(goal, "goal")
@@ -104,6 +106,27 @@ class DStarLitePlanner:
                 self._update_vertex(cell)
                 for predecessor in self.grid.neighbors(cell):
                     self._update_vertex(predecessor)
+
+    def move_start(self, position: Position) -> None:
+        """Advance one legal step without resetting g, rhs, or the queue."""
+        following = self.grid.validate_position(position, "start")
+        if following == self.start:
+            return
+        if not math.isfinite(self.grid.cost(self.start, following)):
+            raise GridError("The robot must move to an open adjacent cell.")
+        self.k_m += manhattan(self._last_start, following)
+        self.start = following
+        self._last_start = following
+
+    def update_cells(self, changes: list[dict]) -> set[Position]:
+        """Apply one atomic batch and update both endpoints of changed edges."""
+        changed = self.grid.apply_changes(changes, protected=(self.start, self.goal))
+        affected = set(changed)
+        for cell in changed:
+            affected.update(self.grid.neighbors(cell))
+        for cell in sorted(affected):
+            self._update_vertex(cell)
+        return changed
 
     def plan(self) -> SearchResult:
         """Repair inconsistent values, then extract a deterministic optimal route."""
