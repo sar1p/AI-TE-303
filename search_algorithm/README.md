@@ -1,6 +1,6 @@
 # Route planning
 
-The lead-owned module implements **D* Lite** and **A*** on a finite four-neighbor
+The lead-owned module implements **D\* Lite** and **A\*** on a finite four-neighbor
 grid. Each open move costs one; blocked cells are impassable. Coordinates use
 zero-based `(row, column)` pairs. Both algorithms return an optimal route or an
 explicit `unreachable` result for a valid map.

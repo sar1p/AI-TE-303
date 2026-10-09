@@ -187,6 +187,6 @@ with evidence_tab:
     st.download_button("Download session evidence (JSON)", json.dumps(payload, indent=2, allow_nan=False),
                        file_name=f"{scenario.id}-session.json", mime="application/json", key="download_evidence")
     st.code("python -m pytest -q\npython -m search_algorithm.main\npython tools/replay_demo.py --output artifacts/demo\npython tools/benchmark_search.py --output artifacts/benchmark --repeats 5", language="bash")
-    st.markdown("**D* Lite** fits a moving start, a fixed goal, and changing connectivity. It retains prior search values and repairs affected vertices. **A*** is simpler for one static query. Both are optimal for this finite unit-cost model.")
+    st.markdown("**D\\* Lite** fits a moving start, a fixed goal, and changing connectivity. It retains prior search values and repairs affected vertices. **A\\*** is simpler for one static query. Both are optimal for this finite unit-cost model.")
     st.markdown("D* Lite can spend more time on initialization or widespread changes. It does not predict moving obstacles, coordinate multiple robots, or control physical hardware. The expert system needs documented rules and its own verification.")
     st.caption("Recorded timings depend on the machine, map, implementation, and event sequence. No universal performance or physical robot reliability claim is made.")
