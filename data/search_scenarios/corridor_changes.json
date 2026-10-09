@@ -1,0 +1,63 @@
+{
+  "id": "corridor-changes",
+  "title": "Warehouse Corridor Changes",
+  "description": "Synthetic warehouse shelves frame a central aisle. Close one central cell, move along the replanned route, reopen the aisle, and continue.",
+  "rows": [
+    ".............",
+    ".###...###...",
+    ".###...###...",
+    ".............",
+    ".............",
+    "...###.###...",
+    "...###.###...",
+    "............."
+  ],
+  "start": [
+    4,
+    1
+  ],
+  "goal": [
+    4,
+    11
+  ],
+  "events": [
+    {
+      "id": "corridor-close-center-aisle",
+      "type": "map",
+      "label": "Block the central aisle",
+      "changes": [
+        {
+          "cell": [
+            4,
+            6
+          ],
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "id": "corridor-step-around-shelves",
+      "type": "move",
+      "label": "Move one legal step on the replanned route"
+    },
+    {
+      "id": "corridor-reopen-center-aisle",
+      "type": "map",
+      "label": "Reopen the central aisle",
+      "changes": [
+        {
+          "cell": [
+            4,
+            6
+          ],
+          "blocked": false
+        }
+      ]
+    },
+    {
+      "id": "corridor-continue-route",
+      "type": "move",
+      "label": "Continue one legal route step"
+    }
+  ]
+}

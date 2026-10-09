@@ -1,0 +1,275 @@
+{
+  "id": "widespread-changes",
+  "title": "Widespread Map Changes",
+  "description": "This medium synthetic map keeps its entire boundary open while scattered interior cells are blocked and restored in batches. It illustrates broad map edits and makes no claim that incremental planning is faster.",
+  "rows": [
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................",
+    "............................"
+  ],
+  "start": [
+    0,
+    0
+  ],
+  "goal": [
+    19,
+    27
+  ],
+  "events": [
+    {
+      "id": "widespread-block-scattered-cells",
+      "type": "map",
+      "label": "Block scattered interior cells",
+      "changes": [
+        {
+          "cell": [
+            2,
+            4
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            2,
+            11
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            2,
+            20
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            4,
+            7
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            4,
+            16
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            5,
+            24
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            7,
+            3
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            7,
+            12
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            7,
+            21
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            9,
+            6
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            9,
+            18
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            11,
+            10
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            12,
+            23
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            14,
+            5
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            15,
+            14
+          ],
+          "blocked": true
+        },
+        {
+          "cell": [
+            17,
+            22
+          ],
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "id": "widespread-restore-scattered-cells",
+      "type": "map",
+      "label": "Restore the scattered interior cells",
+      "changes": [
+        {
+          "cell": [
+            2,
+            4
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            2,
+            11
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            2,
+            20
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            4,
+            7
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            4,
+            16
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            5,
+            24
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            7,
+            3
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            7,
+            12
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            7,
+            21
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            9,
+            6
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            9,
+            18
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            11,
+            10
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            12,
+            23
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            14,
+            5
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            15,
+            14
+          ],
+          "blocked": false
+        },
+        {
+          "cell": [
+            17,
+            22
+          ],
+          "blocked": false
+        }
+      ]
+    }
+  ]
+}

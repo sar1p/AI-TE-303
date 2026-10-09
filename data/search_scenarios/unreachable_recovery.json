@@ -1,0 +1,52 @@
+{
+  "id": "unreachable-recovery",
+  "title": "Unreachable Goal and Recovery",
+  "description": "A single open gap connects two warehouse areas. Closing it isolates the open goal; reopening it restores access. The robot does not move while the goal is unreachable.",
+  "rows": [
+    "....#....",
+    "....#....",
+    "....#....",
+    ".........",
+    "....#....",
+    "....#....",
+    "....#...."
+  ],
+  "start": [
+    3,
+    1
+  ],
+  "goal": [
+    3,
+    7
+  ],
+  "events": [
+    {
+      "id": "recovery-close-only-gap",
+      "type": "map",
+      "label": "Close the only gap",
+      "changes": [
+        {
+          "cell": [
+            3,
+            4
+          ],
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "id": "recovery-reopen-only-gap",
+      "type": "map",
+      "label": "Reopen the gap",
+      "changes": [
+        {
+          "cell": [
+            3,
+            4
+          ],
+          "blocked": false
+        }
+      ]
+    }
+  ]
+}

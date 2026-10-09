@@ -1,0 +1,119 @@
+{
+  "id": "movement-reuse",
+  "title": "Movement and Local Map Reuse",
+  "description": "A medium synthetic warehouse has shelf blocks and open cross-aisles. The robot advances several steps while two local aisle closures are applied and reversed.",
+  "rows": [
+    "........................",
+    "..###..###...###...###..",
+    "..###..###...###...###..",
+    "..###..###...###...###..",
+    "..###..###...###...###..",
+    "........................",
+    "..###..###...###...###..",
+    "..###..###...###...###..",
+    "..###..###...###...###..",
+    "..###..###...###...###..",
+    "........................",
+    "..###..###...###...###..",
+    "..###..###...###...###..",
+    "..###..###...###...###..",
+    "..###..###...###...###..",
+    "........................"
+  ],
+  "start": [
+    5,
+    1
+  ],
+  "goal": [
+    10,
+    22
+  ],
+  "events": [
+    {
+      "id": "movement-step-one",
+      "type": "move",
+      "label": "Advance one legal route step"
+    },
+    {
+      "id": "movement-close-east-cell",
+      "type": "map",
+      "label": "Close a cell in the cross-aisle",
+      "changes": [
+        {
+          "cell": [
+            5,
+            18
+          ],
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "id": "movement-step-two",
+      "type": "move",
+      "label": "Advance one legal route step"
+    },
+    {
+      "id": "movement-step-three",
+      "type": "move",
+      "label": "Advance one more legal route step"
+    },
+    {
+      "id": "movement-reopen-east-cell",
+      "type": "map",
+      "label": "Reopen the cross-aisle cell",
+      "changes": [
+        {
+          "cell": [
+            5,
+            18
+          ],
+          "blocked": false
+        }
+      ]
+    },
+    {
+      "id": "movement-step-four",
+      "type": "move",
+      "label": "Advance one legal route step"
+    },
+    {
+      "id": "movement-close-center-cell",
+      "type": "map",
+      "label": "Close another cross-aisle cell",
+      "changes": [
+        {
+          "cell": [
+            5,
+            12
+          ],
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "id": "movement-step-five",
+      "type": "move",
+      "label": "Advance one legal route step"
+    },
+    {
+      "id": "movement-reopen-center-cell",
+      "type": "map",
+      "label": "Reopen the cross-aisle cell",
+      "changes": [
+        {
+          "cell": [
+            5,
+            12
+          ],
+          "blocked": false
+        }
+      ]
+    },
+    {
+      "id": "movement-step-six",
+      "type": "move",
+      "label": "Advance one final legal route step"
+    }
+  ]
+}
