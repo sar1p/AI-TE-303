@@ -34,3 +34,7 @@ jobs:
         run: python -m pip check
       - name: Run automated tests
         run: python -m pytest -q
+      - name: Replay named scenarios
+        run: python tools/replay_demo.py --output artifacts/demo
+      - name: Validate benchmark execution
+        run: python tools/benchmark_search.py --output artifacts/benchmark --repeats 1

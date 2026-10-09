@@ -49,7 +49,7 @@ The implementation boundary is frozen in [MODULE_CONTRACTS.md](MODULE_CONTRACTS.
 
 ### Diagnosis
 
-`diagnose(facts: dict[str, object]) -> DiagnosisResult`
+`expert_system.engine.diagnose(facts: dict[str, object]) -> dict`
 
 - Facts use documented names and types. An absent observation or `None` means unknown, never false.
 - The function does not mutate the caller's facts. Each call starts a fresh inference session from the supplied raw observations.
@@ -205,7 +205,7 @@ The following are intended commands after the repository and program exist. They
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -c constraints.txt
 .\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe -m expert_system.main --scenario data/diagnostic_scenarios/drive_blockage.json
 .\.venv\Scripts\python.exe -m search_algorithm.main --scenario data/search_scenarios/corridor_changes.json

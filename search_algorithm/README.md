@@ -7,6 +7,12 @@ explicit `unreachable` result for a valid map.
 
 ## Python usage
 
+Run a standalone replay from the repository root:
+
+```powershell
+python -m search_algorithm.main --scenario data/search_scenarios/corridor_changes.json
+```
+
 ```python
 from search_algorithm.grid import Grid
 from search_algorithm.dstar_lite import DStarLitePlanner
@@ -45,4 +51,5 @@ this implementation. A goal change needs a new session. Use `update_cells`, not
 direct mutation of the planner's map, to notify it of changed edges.
 
 See [the exact contracts](../docs/MODULE_CONTRACTS.md) and
+[the implementation and benchmark guide](../docs/SEARCH_ALGORITHM.md), plus
 [Koenig and Likhachev's primary paper](https://idm-lab.org/bib/abstracts/papers/aaai02b.pdf).
